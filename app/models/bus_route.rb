@@ -7,4 +7,8 @@ class BusRoute < ApplicationRecord
     name = params[:rtnm]
     BusRoute.where(external_id: external_id).first_or_create(external_id: external_id, name: name)
   end
+
+  def display_name
+    "#{external_id} - #{name}"
+  end
 end

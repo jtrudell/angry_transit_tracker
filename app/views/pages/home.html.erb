@@ -1,2 +1,9 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container">
+  <h1>Find your bus</h1>
+  <%= form_tag("/bus_routes/search", method: "get") do %>
+  <div class="form-group has-warning">
+    <%= collection_select(:bus_route, :external_id, BusRoute.all, :external_id, :display_name) %>
+  </div>
+  <button type="submit" class="btn btn-primary">BAM!</button>
+  <% end %>
+</div>
