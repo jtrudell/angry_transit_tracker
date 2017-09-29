@@ -1,4 +1,5 @@
 class BusRoute < ApplicationRecord
+  has_many :directions
   validates_presence_of :external_id, :name
   validates_uniqueness_of :external_id
 

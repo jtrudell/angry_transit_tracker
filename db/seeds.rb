@@ -6,5 +6,24 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-# seed BusRoutes
-BusRoutesFetcher.execute
+def seed_bus_routes
+  BusRoutesFetcher.execute
+end
+
+def seed_bus_directions
+  BusRoute.all.each do |route|
+    BusDirectionsFetcher.execute(route)
+  end
+end
+
+def seed_bus_stops
+  BusRoute.all.each do |route|
+    route.directions.each do |direction|
+      BusStopFetcher.execute(route, direction)
+    end
+  end
+end
+
+seed_bus_routes
+seed_bus_directions
+# seed_bus_stops
