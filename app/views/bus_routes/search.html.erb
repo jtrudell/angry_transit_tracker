@@ -1,1 +1,17 @@
-<h1>Hey there, <%= @bus_route.display_name %> bus</h1>
+<div class="container">
+  <h1>Hey there, <%= @bus_route.display_name %> bus</h1>
+
+  <p>I travel in these directions:</p>
+  <ul>
+    <% @bus_route.directions.each do |dir| %>
+      <li><%= dir.direction %></li>
+    <% end %>
+  </ul>
+
+  <p>I make these stops:</p>
+  <ul>
+    <% @bus_route.bus_stops.each do |stop| %>
+      <li>Stop number: <%= stop.stop_id %> - <%= stop.name %> (<%= stop.direction %>)</li>
+    <% end %>
+  </ul>
+</div>

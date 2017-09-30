@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20170929212745) do
   create_table "bus_stops", force: :cascade do |t|
     t.string "stop_id"
     t.string "name"
+    t.string "direction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

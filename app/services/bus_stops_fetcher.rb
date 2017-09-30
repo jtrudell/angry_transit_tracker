@@ -6,7 +6,10 @@ class BusStopsFetcher
   def self.execute(route, direction)
     resp = cta_api_request(route, direction)
     stops = JSON.parse(resp)["bustime-response"]["stops"]
-    stops.map {|stop| BusStop.from_json(stop.symbolize_keys)}
+    stops.map do |stop|
+      stop = BusStop.from_json(stop.symbolize_keys.merge(direction: direction))
+      route.bus_stops << stop if stop.persisted?
+    end
   end
 
   def self.cta_api_request(route, direction)

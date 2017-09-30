@@ -18,12 +18,12 @@ end
 
 def seed_bus_stops
   BusRoute.all.each do |route|
-    route.directions.each do |direction|
-      BusStopFetcher.execute(route, direction)
+    route.directions.each do |dir|
+      BusStopsFetcher.execute(route, dir.direction)
     end
   end
 end
 
 seed_bus_routes
 seed_bus_directions
-# seed_bus_stops
+seed_bus_stops
