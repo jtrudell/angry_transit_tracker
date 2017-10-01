@@ -1,5 +1,6 @@
 class BusRoutesController < ApplicationController
   def show
+    @bus_route = BusRoute.last
   end
 
   def search

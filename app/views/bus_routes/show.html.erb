@@ -1,1 +1,6 @@
-<h1>HEY THERE NOTHING</h1>
+<%= content_tag :div,
+  id: "bus_route",
+  class: "container",
+  data: @bus_route.to_json do %>
+<% end %>
+<%= javascript_pack_tag 'bus_route' %>
