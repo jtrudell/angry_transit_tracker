@@ -1,24 +1,22 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the Angry CTA Bus Tracker. To get it up and running:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
+* Dependencies:
+** You will need Postgres, Ruby, bundler (gem install bundler) and npm. To install dependences:
+```bundle install```
+```npm install```
 
 * Configuration
+** You will need your own API key for the CTA bus tracker. Create a .env file in the root of the project, and include your API key:
+```CTA_API_KEY = "YOUR KEY HERE"```
 
-* Database creation
+* Database
+** We use postgres. Note that you will not be able to seed the database without an CTA API key (see above)
+```rails db:create && rails db:migrate && rails db:seed```
 
-* Database initialization
+* Start the server on localhost 3000. You will need foreman (gem install foreman) if you don't already have it.
+```foreman start -f Procfile.dev -p 3000```
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Run the tests
+```rails test```
