@@ -1,6 +1,7 @@
 class Direction < ApplicationRecord
   belongs_to :bus_route
   validates_presence_of :direction, :bus_route_id
+  validates_inclusion_of :direction, :in => %w(Northbound Southbound Eastbound Westbound)
 
   def self.from_json(**params)
     bus_route_id = params[:bus_route_id]
