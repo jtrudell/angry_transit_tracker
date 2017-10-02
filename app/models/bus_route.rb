@@ -13,4 +13,11 @@ class BusRoute < ApplicationRecord
   def display_name
     "#{external_id} - #{name}"
   end
+
+  def as_json(options={})
+    super(
+      only: [:id, :external_id, :name],
+      include: [:directions, :bus_stops]
+    )
+  end
 end
