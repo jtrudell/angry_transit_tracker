@@ -1,4 +1,5 @@
 # README
+[![CircleCI](https://circleci.com/gh/jtrudell/angry_transit_tracker/tree/master.svg?style=shield)](https://circleci.com/gh/jtrudell/angry_transit_tracker/tree/master)
 
 This is the Angry CTA Bus Tracker. To get it up and running:
 

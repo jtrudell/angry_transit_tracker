@@ -42,7 +42,8 @@ group :development, :test do
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'pry'
-  gem 'dotenv-rails', groups: [:development, :test]
+  gem 'dotenv-rails'
+  gem 'minitest-ci'
 end
 
 group :development do

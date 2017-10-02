@@ -1,0 +1,70 @@
+# Ruby CircleCI 2.0 configuration file
+# Check https://circleci.com/docs/2.0/language-ruby/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+     - image: circleci/ruby:2.4.1-node-browsers
+       environment:
+         PGHOST: 127.0.0.1
+         PGUSER: postgres
+         RAILS_ENV: test
+         RACK_ENV: test
+     - image: circleci/postgres:9.5
+       environment:
+         POSTGRES_DB: angry_transit_tracker_development
+         POSTGRES_USER: postgres
+         POSTGRES_PASSWORD: ""
+
+    working_directory: ~/angry_transit_tracker
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
+
+      - run:
+          name: Bundle
+          command: bundle install --path vendor/bundle
+          environment:
+            DATABASE_URL: "postgres://postgres@localhost:5432/angry_transit_tracker_development"
+
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: Database Setupd
+          command: |
+            # sudo -u postgres psql -p 5433 -c "create user ubuntu with password ‘ubuntu’;”
+            # sudo -u postgres psql -p 5433 -c "alter user ubuntu with superuser;”
+            # sudo -u postgres psql -p 5433 -c "create database test;"
+            bundle exec rake db:create
+            bundle exec rake db:schema:load
+
+      # run tests!
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            bundle exec rails test
+
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+
+      - store_artifacts:
+          path: /code/test-results
+          destination: prefix
+
+    # override:
+    #   - bundle exec rails test:
+    #       parallel: true
+    #       files:
+    #         - test/**/*_test.rb
