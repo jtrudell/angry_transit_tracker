@@ -7,6 +7,7 @@ class BusStop < ApplicationRecord
     stop_id = params[:stpid]
     name = params[:stpnm]
     direction = params[:direction]
-    BusStop.where(stop_id: stop_id, direction: direction).first_or_create(stop_id: stop_id, name: name, direction: direction)
+    BusStop.where(stop_id: stop_id, direction: direction)
+           .first_or_create(stop_id: stop_id, name: name, direction: direction)
   end
 end

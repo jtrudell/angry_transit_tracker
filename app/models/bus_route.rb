@@ -7,14 +7,15 @@ class BusRoute < ApplicationRecord
   def self.from_json(**params)
     external_id = params[:rt]
     name = params[:rtnm]
-    BusRoute.where(external_id: external_id).first_or_create(external_id: external_id, name: name)
+    BusRoute.where(external_id: external_id)
+            .first_or_create(external_id: external_id, name: name)
   end
 
   def display_name
     "#{external_id} - #{name}"
   end
 
-  def as_json(options={})
+  def as_json(options = {})
     super(
       only: [:id, :external_id, :name],
       include: [:directions, :bus_stops]
