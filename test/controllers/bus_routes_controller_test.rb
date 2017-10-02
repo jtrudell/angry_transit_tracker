@@ -1,9 +1,9 @@
 require 'test_helper'
 
 class BusRoutesControllerTest < ActionDispatch::IntegrationTest
-  test "should get search" do
-    BusRoute.create(external_id: "1", name: "Foo")
-    get bus_routes_search_url, params: { bus_route: { external_id: "1"} }
+  test "should get show" do
+    bus_route = BusRoute.create(external_id: "1", name: "Foo")
+    get bus_route_path(bus_route.id)
     assert_response :success
   end
 end
