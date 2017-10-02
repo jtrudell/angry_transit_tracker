@@ -4,21 +4,20 @@ class BusRoutesFetcherTest < ActiveSupport::TestCase
   test "#execute creates BusRoutes" do
     resp = {
       "bustime-response": {
-      "routes": [
-        {
-          "rt": "1",
-          "rtnm": "Bronzeville/Union Station",
-          "rtclr": "#336633",
-          "rtdd": "1"
-        },
-        {
-          "rt": "2",
-          "rtnm": "Somewhere",
-          "rtclr": "#ffffff",
-          "rtdd": "5"
-        }
-
-      ]
+        "routes": [
+          {
+            "rt": "1",
+            "rtnm": "Bronzeville/Union Station",
+            "rtclr": "#336633",
+            "rtdd": "1"
+          },
+          {
+            "rt": "2",
+            "rtnm": "Somewhere",
+            "rtclr": "#ffffff",
+            "rtdd": "5"
+          }
+        ]
       }
     }.to_json
 
