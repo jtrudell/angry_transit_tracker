@@ -5,12 +5,7 @@ class BusPredictionsFetcher
 
   def self.execute(route, stop)
     resp = cta_api_request(route, stop)
-    parsed_resp = JSON.parse(resp)['bustime-response']
-    if parsed_resp['error']
-      parsed_resp['error']
-    else
-      parsed_resp['prd']
-    end
+    JSON.parse(resp)['bustime-response']
   end
 
   def self.cta_api_request(route, stop)

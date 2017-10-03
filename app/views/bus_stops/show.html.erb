@@ -1,6 +1,6 @@
 <div class="container">
   <h1>Hey there, <%= @bus_stop.display_name %> bus stop</h1>
-  <% @predictions.first.each do |k, v| %>
-    <p><%= "#{k}: #{v}" %></p>
+  <% @predictions.each do |k, v| %>
+    <p><%= "#{k.capitalize}: #{v}" %></p>
   <% end %>
 </div>
