@@ -1,5 +1,6 @@
+require 'net/http'
+
 class BusPredictionsFetcher
-  require 'net/http'
   CTA_API_KEY = Rails.application.secrets.api_key
   CTA_PREDICTION_URL = 'http://www.ctabustracker.com/bustime/api/v2/getpredictions'.freeze
 

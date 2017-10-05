@@ -1,5 +1,6 @@
+require 'net/http'
+
 class BusStopsFetcher
-  require 'net/http'
   CTA_API_KEY = Rails.application.secrets.api_key
   CTA_STOP_URL = 'http://www.ctabustracker.com/bustime/api/v2/getstops'.freeze
 
