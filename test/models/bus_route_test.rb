@@ -15,7 +15,7 @@ class BusRouteTest < ActiveSupport::TestCase
   end
 
   test 'valid bus route' do
-    bus_route = BusRoute.new(external_id: '555', name: 'My Aweomse Bus')
+    bus_route = BusRoute.new(external_id: '555', name: 'My Awesome Bus')
     assert bus_route.valid?
   end
 
