@@ -1,11 +1,11 @@
 class BusStopsController < ApplicationController
   def index
-    @bus_route
+    @route_name = route_name
     @bus_stops = bus_route.bus_stops
   end
 
   def show
-    @bus_stop
+    @route_name = route_name
     raw_predictions = fetch_predictions
     @predictions = format(raw_predictions)
   end
@@ -17,6 +17,10 @@ class BusStopsController < ApplicationController
 
   def bus_stop
     @bus_stop ||= BusStop.find(params.require(:id))
+  end
+
+  def route_name
+    @bus_route&.display_name
   end
 
   def fetch_predictions
