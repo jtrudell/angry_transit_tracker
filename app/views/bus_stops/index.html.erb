@@ -1,0 +1,9 @@
+<div class="container">
+  <h1>Hey there, <%= @route_name %> bus stops</h1>
+
+  <ul>
+    <% @bus_stops.each do |stop| %>
+      <li><%= stop.display_name %></li>
+    <% end %>
+  </ul>
+</div>

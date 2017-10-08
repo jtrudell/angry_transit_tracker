@@ -10,4 +10,8 @@ class BusStop < ApplicationRecord
     BusStop.where(stop_id: stop_id, direction: direction)
            .first_or_create(stop_id: stop_id, name: name, direction: direction)
   end
+
+  def display_name
+    "#{stop_id}: #{name} (#{direction})"
+  end
 end

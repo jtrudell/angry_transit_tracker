@@ -1,5 +1,6 @@
+require 'net/http'
+
 class BusDirectionsFetcher
-  require 'net/http'
   CTA_API_KEY = Rails.application.secrets.api_key
   CTA_DIRECTION_URL = 'http://www.ctabustracker.com/bustime/api/v2/getdirections'.freeze
 

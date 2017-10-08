@@ -36,6 +36,9 @@ gem 'jquery-rails'
 
 gem 'webpacker', '~> 3.0'
 
+# active model serializers for serving JSON
+gem 'active_model_serializers'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

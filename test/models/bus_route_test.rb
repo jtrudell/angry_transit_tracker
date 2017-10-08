@@ -15,7 +15,7 @@ class BusRouteTest < ActiveSupport::TestCase
   end
 
   test 'valid bus route' do
-    bus_route = BusRoute.new(external_id: '555', name: 'My Aweomse Bus')
+    bus_route = BusRoute.new(external_id: '555', name: 'My Awesome Bus')
     assert bus_route.valid?
   end
 
@@ -69,6 +69,8 @@ class BusRouteTest < ActiveSupport::TestCase
       }]
     }
 
-    assert_equal json, bus_route.as_json
+    assert_equal json['id'], bus_route.as_json['id']
+    assert_equal json['directions'], bus_route.as_json['directions']
+    assert_equal json['bus_stops'], bus_route.as_json['bus_stops']
   end
 end

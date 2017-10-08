@@ -1,0 +1,6 @@
+<div class="container">
+  <h1>Hey there, <%= @route_name %> bus stop</h1>
+  <% @predictions.each do |k, v| %>
+    <p><%= "#{k.capitalize}: #{v}" %></p>
+  <% end %>
+</div>
