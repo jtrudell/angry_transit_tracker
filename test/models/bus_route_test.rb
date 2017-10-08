@@ -47,23 +47,24 @@ class BusRouteTest < ActiveSupport::TestCase
     bus_route = BusRoute.create(external_id: "300", name: "Somewhere")
     direction = bus_route.directions.create(direction: "Northbound")
     stop = bus_route.bus_stops.create(stop_id: "200", name: "Wacker and Monroe", direction: "Northbound")
+    bus_route_id = bus_route.id
 
     json = {
-      "id" => bus_route.id,
+      "id" => bus_route_id,
       "external_id" => "300",
       "name" => "Somewhere",
       "directions"=>[
         {"id"=> direction.id,
-         "direction"=> direction.direction,
-         "bus_route_id"=> direction.bus_route_id,
+         "direction"=> "Northbound",
+         "bus_route_id"=> bus_route_id,
          "created_at"=> direction.created_at,
          "updated_at"=> direction.updated_at
       }],
       "bus_stops"=>[
         {"id"=> stop.id,
          "stop_id"=> stop.stop_id,
-         "name"=> stop.name,
-         "direction"=> stop.direction,
+         "name"=> "Wacker and Monroe",
+         "direction"=> "Northbound",
          "created_at"=> stop.created_at,
          "updated_at"=> stop.updated_at
       }]
