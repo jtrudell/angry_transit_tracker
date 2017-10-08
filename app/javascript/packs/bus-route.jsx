@@ -2,6 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
+import BusStop from './bus-stop'
+import Direction from './direction'
+
 const BusRoute = props => (
   <div className="busRoute">
     <h1>Hey there, {props.busRoute.external_id} - {props.busRoute.name} bus</h1>
@@ -10,7 +13,7 @@ const BusRoute = props => (
     <ul>
       {
         props.busRoute.directions.map((direction) => {
-          return <li key={direction.id}>{direction.direction}</li>
+          return <Direction key={direction.id} direction={direction} />
         })
       }
     </ul>
@@ -20,9 +23,7 @@ const BusRoute = props => (
       {
         props.busRoute.bus_stops.map((stop) => {
           return (
-            <li key={stop.id}>
-              Stop number: {stop.stop_id} - {stop.name} ({stop.direction})
-            </li>
+            <BusStop key={stop.id} stop={stop} />
           )
         })
       }
