@@ -47,31 +47,14 @@ class BusRouteTest < ActiveSupport::TestCase
     bus_route = BusRoute.create(external_id: "300", name: "Somewhere")
     direction = bus_route.directions.create(direction: "Northbound")
     stop = bus_route.bus_stops.create(stop_id: "200", name: "Wacker and Monroe", direction: "Northbound")
-    bus_route_id = bus_route.id
 
-    json = {
-      "id" => bus_route_id,
-      "external_id" => "300",
-      "name" => "Somewhere",
-      "directions"=>[
-        {"id"=> direction.id,
-         "direction"=> "Northbound",
-         "bus_route_id"=> bus_route_id,
-         "created_at"=> direction.created_at,
-         "updated_at"=> direction.updated_at
-      }],
-      "bus_stops"=>[
-        {"id"=> stop.id,
-         "stop_id"=> stop.stop_id,
-         "name"=> "Wacker and Monroe",
-         "direction"=> "Northbound",
-         "created_at"=> stop.created_at,
-         "updated_at"=> stop.updated_at
-      }]
-    }
-
-    assert_equal json['id'], bus_route.as_json['id']
-    assert_equal json['directions'], bus_route.as_json['directions']
-    assert_equal json['bus_stops'], bus_route.as_json['bus_stops']
+    assert_equal bus_route.id, bus_route.as_json['id']
+    assert_equal "300", bus_route.as_json['external_id']
+    assert_equal "Northbound", bus_route.as_json['directions'].first["direction"]
+    assert_equal bus_route.id, bus_route.as_json['directions'].first["bus_route_id"]
+    assert_equal stop.id, bus_route.as_json['bus_stops'].first["id"]
+    assert_equal "Wacker and Monroe", bus_route.as_json['bus_stops'].first["name"]
+    assert_equal "Northbound", bus_route.as_json['bus_stops'].first["direction"]
+    assert_equal stop.created_at, bus_route.as_json['bus_stops'].first["created_at"]
   end
 end
