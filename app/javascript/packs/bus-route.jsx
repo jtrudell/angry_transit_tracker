@@ -2,34 +2,37 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
-import BusStop from './bus-stop'
+import BusStopLink from './bus-stop-link'
 import Direction from './direction'
 
-const BusRoute = props => (
-  <div className="busRoute">
-    <h1>Hey there, {props.busRoute.external_id} - {props.busRoute.name} bus</h1>
+const BusRoute = (props) => {
+  const busRoute = props.busRoute
+  return (
+    <div className="busRoute">
+      <h1>Hey there, {busRoute.external_id} - {busRoute.name} bus</h1>
 
-    <p>I travel in these directions:</p>
-    <ul>
-      {
-        props.busRoute.directions.map((direction) => {
-          return <Direction key={direction.id} direction={direction} />
-        })
-      }
-    </ul>
+      <p>I travel in these directions:</p>
+      <ul>
+        {
+          busRoute.directions.map((direction) => {
+            return <Direction key={direction.id} direction={direction} />
+          })
+        }
+      </ul>
 
-    <p>I make these stops:</p>
-    <ul>
-      {
-        props.busRoute.bus_stops.map((stop) => {
-          return (
-            <BusStop key={stop.id} stop={stop} />
-          )
-        })
-      }
-    </ul>
-  </div>
-)
+      <p>I make these stops:</p>
+      <ul>
+        {
+          busRoute.bus_stops.map((stop) => {
+            return (
+              <BusStopLink key={stop.id} linkUrl={"/bus_routes/"+busRoute.id+"/bus_stops/"+stop.id} stop={stop} />
+            )
+          })
+        }
+      </ul>
+    </div>
+  )
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   const node = document.getElementById('bus_route')

@@ -1,6 +1,7 @@
-<div class="container">
-  <h1>Hey there, <%= @route_name %> bus stop</h1>
-  <% @predictions.each do |k, v| %>
-    <p><%= "#{k.capitalize}: #{v}" %></p>
-  <% end %>
-</div>
+<%= content_tag :div,
+  nil,
+  id: "app",
+  class: "container",
+  data: { predictions: @predictions, routeName: @route_name }.to_json %>
+
+<%= javascript_pack_tag 'bus-stop' %>
