@@ -3,7 +3,7 @@
 
 This is the Angry CTA Bus Tracker. To get it up and running:
 
-* Dependencies: You will need Postgres, Ruby, bundler (gem install bundler) and npm.
+* Dependencies: You will need Postgres, Ruby version 2.4.2, bundler (gem install bundler) and npm.
 
 To install dependences:
 ```bundle install && npm install```
