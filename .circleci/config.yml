@@ -40,13 +40,18 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       - run:
-          name: Database Setupd
+          name: Database Setup
           command: |
             # sudo -u postgres psql -p 5433 -c "create user ubuntu with password ‘ubuntu’;”
             # sudo -u postgres psql -p 5433 -c "alter user ubuntu with superuser;”
             # sudo -u postgres psql -p 5433 -c "create database test;"
             bundle exec rake db:create
             bundle exec rake db:schema:load
+
+      - run:
+          name: Precompile Assets
+          command: |
+            bundle exec rails assets:precompile
 
       # run tests!
       - run:
