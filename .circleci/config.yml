@@ -54,7 +54,7 @@ jobs:
       - run:
           name: Brakeman
           command: |
-            bundle exec brakeman --exit-on-warn -o
+            bundle exec brakeman --exit-on-warn
 
       # run tests!
       - run:
