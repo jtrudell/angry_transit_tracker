@@ -15,12 +15,12 @@ class BusStopTest < ActiveSupport::TestCase
   end
 
   test 'valid bus stop' do
-    bus_stop = BusStop.new(stop_id: '555', name: 'Fith and Third', direction: 'Northbound')
+    bus_stop = BusStop.new(stop_id: '555', name: 'Fifth and Third', direction: 'Northbound')
     assert bus_stop.valid?
   end
 
   test 'invalid without stop_id' do
-    bus_stop = BusStop.new(name: 'Fith and Third', direction: 'Northbound')
+    bus_stop = BusStop.new(name: 'Fifth and Third', direction: 'Northbound')
     assert bus_stop.invalid?
     assert_equal ["can't be blank"], bus_stop.errors[:stop_id]
   end
@@ -37,17 +37,17 @@ class BusStopTest < ActiveSupport::TestCase
     assert_equal ["can't be blank"], bus_stop.errors[:direction]
   end
 
-  test 'invalid if stop_id not uniuqe' do
-    BusStop.create(stop_id: '555', name: 'Fith and Third', direction: 'Northbound')
+  test 'invalid if stop_id not unique' do
+    BusStop.create(stop_id: '555', name: 'Fifth and Third', direction: 'Northbound')
     bus_stop = BusStop.new(stop_id: '555', name: 'Foo Bar', direction: 'Southbound')
     assert bus_stop.invalid?
     assert_equal ['has already been taken'], bus_stop.errors[:stop_id]
   end
 
   test 'scope by_direction' do
-    BusStop.create(stop_id: '555', name: 'Fith and Third', direction: 'Northbound')
+    BusStop.create(stop_id: '555', name: 'Fifth and Third', direction: 'Northbound')
     bus_stop = BusStop.create(stop_id: '666', name: 'Foo Bar', direction: 'Southbound')
-    assert_equal 1, BusStop.all.by_direction('Southbound').count
-    assert_equal bus_stop, BusStop.all.by_direction('Southbound').first
+    assert_equal 1, BusStop.by_direction('Southbound').count
+    assert_equal bus_stop, BusStop.by_direction('Southbound').first
   end
 end

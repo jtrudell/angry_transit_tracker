@@ -20,7 +20,7 @@ class BusRouteTest < ActiveSupport::TestCase
   end
 
   test 'invalid without external_id' do
-    bus_route = BusRoute.new(name: 'My Aweomse Bus')
+    bus_route = BusRoute.new(name: 'My Awesome Bus')
     assert bus_route.invalid?
     assert_equal ["can't be blank"], bus_route.errors[:external_id]
   end
@@ -31,15 +31,15 @@ class BusRouteTest < ActiveSupport::TestCase
     assert_equal ["can't be blank"], bus_route.errors[:name]
   end
 
-  test 'invalid if external_id not uniuqe' do
-    BusRoute.create(external_id: '555', name: 'My Aweomse Bus')
+  test 'invalid if external_id not unique' do
+    BusRoute.create(external_id: '555', name: 'My Awesome Bus')
     bus_route = BusRoute.new(external_id: '555', name: 'Party Bus')
     assert bus_route.invalid?
     assert_equal ['has already been taken'], bus_route.errors[:external_id]
   end
 
   test 'has many directions' do
-    bus_route = BusRoute.create(external_id: '555', name: 'My Aweomse Bus')
+    bus_route = BusRoute.create(external_id: '555', name: 'My Awesome Bus')
     direction = Direction.create(bus_route_id: bus_route.id, direction: 'Northbound')
     Direction.create(bus_route_id: bus_route.id, direction: 'Southbound')
     assert_equal 2, bus_route.directions.count
