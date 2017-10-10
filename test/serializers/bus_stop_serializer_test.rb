@@ -13,8 +13,7 @@ class BusStopSerializerTest < ActiveSupport::TestCase
          :direction=>"Northbound",
          :display_name=>"555: My Awesome Bus Stop (Northbound)",
          :created_at=>nil,
-         :updated_at=>nil,
-         :bus_routes=>[]
+         :updated_at=>nil
       }
     }
 

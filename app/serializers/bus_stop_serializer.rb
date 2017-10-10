@@ -8,8 +8,6 @@ class BusStopSerializer < ActiveModel::Serializer
     :created_at,
     :updated_at
 
-  has_many :bus_routes
-
   private
 
   def display_name

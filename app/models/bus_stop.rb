@@ -3,6 +3,8 @@ class BusStop < ApplicationRecord
   validates_presence_of :stop_id, :name, :direction
   validates_uniqueness_of :stop_id
 
+  scope :by_direction, ->(direction) { where(direction: direction) }
+
   def self.from_json(**params)
     stop_id = params[:stpid]
     name = params[:stpnm]
