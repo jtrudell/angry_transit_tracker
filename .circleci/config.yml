@@ -1,6 +1,6 @@
 # Ruby CircleCI 2.0 configuration file
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
-#
+
 version: 2
 jobs:
   build:
@@ -42,9 +42,6 @@ jobs:
       - run:
           name: Database Setup
           command: |
-            # sudo -u postgres psql -p 5433 -c "create user ubuntu with password ‘ubuntu’;”
-            # sudo -u postgres psql -p 5433 -c "alter user ubuntu with superuser;”
-            # sudo -u postgres psql -p 5433 -c "create database test;"
             bundle exec rake db:create
             bundle exec rake db:schema:load
 
@@ -52,6 +49,12 @@ jobs:
           name: Precompile Assets
           command: |
             bundle exec rails assets:precompile
+
+      # run brakeman
+      - run:
+          name: Brakeman
+          command: |
+            bundle exec brakeman --exit-on-warn
 
       # run tests!
       - run:
@@ -67,9 +70,3 @@ jobs:
       - store_artifacts:
           path: /code/test-results
           destination: prefix
-
-    # override:
-    #   - bundle exec rails test:
-    #       parallel: true
-    #       files:
-    #         - test/**/*_test.rb

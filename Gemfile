@@ -48,6 +48,7 @@ group :development, :test do
   gem 'pry'
   gem 'dotenv-rails'
   gem 'minitest-ci'
+  gem "brakeman", :require => false
 end
 
 group :development do
